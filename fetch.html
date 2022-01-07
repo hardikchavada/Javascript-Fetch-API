@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <h1> This is a fetch api</h1>
+    <h3 id="add"> Already Present </h3>
+    <button onclick="getdata();">Fetch</button>
+    <table id="table">
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Value</th>
+        </tr>
+        
+    </table>
+    <script>
+        const add = document.getElementById('add');
+        const table = document.getElementById('table');
+        async function getdata(){
+            let url = "https://reqres.in/api/products";
+            fetch(url)
+            .then(function (response) {
+                return response.json();
+            }).
+            then(function(out) {
+                data = out.data;
+                console.log(data);
+                for(i=0; i < data.length; i++){
+                    
+                    table.innerHTML += `<tr><td> ${data[i].id}</td> <td> ${data[i].name} </td> <td> ${data[i].year} </td> <td> ${data[i].color} </td> <td> ${data[i].pantone_value} </td> <tr>`;
+                    
+                }
+            });
+
+                // try{
+                //     let url = "https://reqres.in/api/products";
+                //     const res = await fetch(url);
+                //     const out = await res.json();
+                //     console.log(out.data[0].id);
+                // }
+                // catch (err){
+                //     console.log(err)
+                // }
+        }
+       
+    </script>
+</body>
+</html>
